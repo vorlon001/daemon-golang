@@ -36,7 +36,9 @@ func (d *Daemon) initSignals ( exit_chan chan int) {
                 syscall.SIGINT,
                 syscall.SIGTERM,
                 syscall.SIGQUIT)
-        log.Printf("%#v\n",os.Getpid())
+        if (*d.Context).DebugMode==true {
+                log.Printf("%#v\n",os.Getpid())
+        }
         go func() {
                 for {
                         s := <-signal_chan
